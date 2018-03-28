@@ -1,0 +1,28 @@
+        public bool Merge(TimePeriod timePeriod)
+        {
+            if (StartTime <= timePeriod.StartTime && EndTime >= timePeriod.EndTime)
+                return true;
+            bool merged = false;
+            if (timePeriod.StartTime <= EndTime && EndTime < timePeriod.EndTime)
+            {
+                EndTime = timePeriod.EndTime;
+                merged = true;
+            }
+            if (timePeriod.StartTime < StartTime && StartTime <= timePeriod.EndTime)
+            {
+                StartTime = timePeriod.StartTime;
+                merged = true;
+            }
+            return merged;
+        }
+
+                        foreach (TimePeriod timePeriod in userConfig.TimePeriods)
+                        {
+                            if (timePeriod.Merge(newTimePeriod))
+                            {
+                                merged = true;
+                                break;
+                            }
+                        }
+                        if (!merged)
+                            userConfig.TimePeriods.Add(newTimePeriod);
